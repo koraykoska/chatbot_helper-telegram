@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'fixtures/toolbox.rb'
 
 class ChatbotHelper::ToolboxTest < Minitest::Test
   def setup
