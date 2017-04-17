@@ -4,9 +4,21 @@ require 'fixtures/toolbox.rb'
 class ChatbotHelper::ToolboxTest < Minitest::Test
   def setup
     @toolbox = ChatbotHelper::Telegram::Toolbox
+    @fixtures = Fixtures::Toolbox
   end
 
   def test_parse_json
-    assert_equal({ 'test' => 'example' }, @toolbox.parse_json('{"test": "example"}'))
+    # Valid json should parse correctly
+    assert_equal @fixtures.valid_json_result,
+                 @toolbox.parse_json(@fixtures.valid_json)
+
+    # Invalid json should return nil
+    assert_nil @toolbox.parse_json(@fixtures.invalid_json)
+
+    # Wrong type should return nil
+    assert_nil @toolbox.parse_json(1.0)
+
+    # parse_json(nil) should return nil
+    assert_nil @toolbox.parse_json(nil)
   end
 end
