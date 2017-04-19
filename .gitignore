@@ -123,3 +123,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/macos,windows,rubymine
+
+# Don't check in the .idea directory
+# This can be discussed but for now it doesn't make any sense to check it in
+.idea/

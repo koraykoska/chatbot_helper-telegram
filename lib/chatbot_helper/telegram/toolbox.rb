@@ -7,15 +7,17 @@ module ChatbotHelper
     # Please don't use these methods as they are subject to chhange any time
     # and are not documented in any way.
     module Toolbox
-      def self.parse_json(string)
-        p = JSON.parse(string, max_nesting: false)
+      def self.parse_json(string, opts = {})
+        opts[:max_nesting] = false unless opts[:max_nesting]
+        p = JSON.parse(string, opts)
         return p
       rescue TypeError, JSON::ParserError => e
         return nil
       end
 
-      def self.generate_json(json)
-        p = JSON.generate(json, max_nesting: false)
+      def self.generate_json(json, opts = {})
+        opts[:max_nesting] = false unless opts[:max_nesting]
+        p = JSON.generate(json, opts)
         return p
       rescue JSON::GeneratorError => e
         return nil

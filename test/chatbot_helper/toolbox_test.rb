@@ -12,6 +12,9 @@ class ChatbotHelper::ToolboxTest < Minitest::Test
     assert_equal @fixtures.valid_json_result,
                  @toolbox.parse_json(@fixtures.valid_json)
 
+    # Primitive type should be parsed successfully
+    assert_equal 1.0, @toolbox.parse_json('1.0')
+
     # Invalid json should return nil
     assert_nil @toolbox.parse_json(@fixtures.invalid_json)
 
@@ -27,10 +30,16 @@ class ChatbotHelper::ToolboxTest < Minitest::Test
     assert_equal @fixtures.valid_json,
                  @toolbox.generate_json(@fixtures.valid_json_result)
 
-    # Wrong type should return nil
-    assert_nil @toolbox.generate_json(1.0)
+    # Primitive types should be generated successfully
+    assert_equal '1.0', @toolbox.generate_json(1.0)
 
-    # generate_json(nil) should return nil
-    assert_nil @toolbox.generate_json(nil)
+    # generate_json(nil) should generate null
+    assert_equal 'null', @toolbox.generate_json(nil)
+
+    # generate_json(NaN) should return nil
+    assert_nil @toolbox.generate_json(Float::NAN)
+
+    # generate_json(NaN) should not return nil if allow_nan is true
+    refute_nil @toolbox.generate_json(Float::NAN, allow_nan: true)
   end
 end
