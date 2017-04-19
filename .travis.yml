@@ -6,3 +6,7 @@ rvm:
   - 2.3.4
   - 2.4.1
 before_install: gem install bundler -v 1.14.6
+# Code Climate plugin
+addons:
+    code_climate:
+        repo_token: 9e0693f87fb7a67ceb8b36f123dc70f6dd8a752d61faf47cfedad87932242193
