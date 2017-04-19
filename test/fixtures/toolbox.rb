@@ -1,7 +1,7 @@
 module Fixtures
   module Toolbox
     # The valid json and its result
-    @valid_json = '{"foo": "bar"}'
+    @valid_json = '{"foo":"bar"}'
     @valid_json_result = { 'foo' => 'bar' }
 
     # An invalid json string and the expected result
