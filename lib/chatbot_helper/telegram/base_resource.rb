@@ -152,6 +152,8 @@ module ChatbotHelper
         end
       end
 
+      attr_reader :json
+
       # Initializes a new resource object with the given json String or hash.
       #
       # Either `json` or `string` should be set but not both. It is recommended
@@ -169,7 +171,23 @@ module ChatbotHelper
 
         # Implement getters
         implement_field_accessors
+        implement_object_accessors
+        implement_array_accessors
       end
+
+      def to_s
+        @toolbox.generate_json(@json)
+      end
+
+      alias to_json to_s
+
+      def ==(other)
+        other.is_a?(ChatbotHelper::Telegram::BaseResource) ?
+          @json == other.json :
+          @json == other
+      end
+
+      alias eql? ==
 
       protected
 
@@ -183,6 +201,51 @@ module ChatbotHelper
         self.class.optional_fields.each do |f|
           define_singleton_method(f) do
             return @json[f]
+          end
+        end
+      end
+
+      def implement_object_accessors
+        self.class.required_objects.each do |o|
+          res = o[:type].new(json: @json[o[:name]])
+          define_singleton_method(o[:name]) do
+            return res
+          end
+        end
+
+        # Optional objects mus be either nil or a valid resource
+        self.class.optional_objects.each do |o|
+          res = nil
+          res_val = @json[o[:name]]
+          res = o[:type].new(json: res_val) unless res_val.nil?
+          define_singleton_method(o[:name]) do
+            return res
+          end
+        end
+      end
+
+      def implement_array_accessors
+        self.class.required_arrays.each do |a|
+          elements = []
+          @json[a[:name]].each do |el|
+            elements << a[:type].new(json: el)
+          end
+          define_singleton_method(a[:name]) do
+            return elements
+          end
+        end
+
+        # Optional arrays must be either nil or arrays of valid resources
+        self.class.optional_arrays.each do |a|
+          elements = []
+          arr_val = @json[a[:name]]
+          unless arr_val.nil?
+            arr_val.each do |el|
+              elements << a[:type].new(json: el)
+            end
+          end
+          define_singleton_method(a[:name]) do
+            return elements
           end
         end
       end
