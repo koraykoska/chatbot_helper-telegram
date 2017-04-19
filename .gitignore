@@ -1,5 +1,7 @@
 /.bundle/
 /.yardoc
+# Don't check in Gemfile.lock for gems.
+# Explanation: http://yehudakatz.com/2010/12/16/clarifying-the-roles-of-the-gemspec-and-gemfile/
 /Gemfile.lock
 /_yardoc/
 /coverage/
