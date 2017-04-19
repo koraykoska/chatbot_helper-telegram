@@ -1,4 +1,4 @@
-# ChatbotHelper::Telegram
+# ChatbotHelper::Telegram [![Build Status](https://travis-ci.org/Ybrin/chatbot_helper-telegram.svg?branch=master)](https://travis-ci.org/Ybrin/chatbot_helper-telegram) [![Code Climate](https://codeclimate.com/github/Ybrin/chatbot_helper-telegram/badges/gpa.svg)](https://codeclimate.com/github/Ybrin/chatbot_helper-telegram)
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/chatbot_helper/telegram`. To experiment with that code, run `bin/console` for an interactive prompt.
 
