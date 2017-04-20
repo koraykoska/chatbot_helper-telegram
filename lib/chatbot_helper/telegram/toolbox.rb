@@ -15,9 +15,9 @@ module ChatbotHelper
         return nil
       end
 
-      def self.generate_json(json, opts = {})
+      def self.generate_json(hash, opts = {})
         opts[:max_nesting] = false unless opts[:max_nesting]
-        p = JSON.generate(json, opts)
+        p = JSON.generate(hash, opts)
         return p
       rescue JSON::GeneratorError => e
         return nil

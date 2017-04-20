@@ -152,22 +152,22 @@ module ChatbotHelper
         end
       end
 
-      attr_reader :json
+      attr_reader :hash
 
       # Initializes a new resource object with the given json String or hash.
       #
-      # Either +json+ or +string+ should be set but not both. It is recommended
-      # to pass +string+ instead of an already deserialized hash (+json+) to the
+      # Either +hash+ or +string+ should be set but not both. It is recommended
+      # to pass +string+ instead of an already deserialized hash (+hash+) to the
       # initializer.
       #
-      # @param json [Hash] A hash which represents this resource as described in the telegram bot api. Defaults to nil.
+      # @param hash [Hash] A hash which represents this resource as described in the telegram bot api. Defaults to nil.
       # @param string [String] A json String which represents this resource as described in the telegram bot api. Defaults to nil.
-      def initialize(json: nil, string: nil)
+      def initialize(hash: nil, string: nil)
         @toolbox = ChatbotHelper::Telegram::Toolbox
-        @json = json.nil? ? @toolbox.parse_json(string) : @toolbox.parse_json(@toolbox.generate_json(json))
+        @hash = hash.nil? ? @toolbox.parse_json(string) : @toolbox.parse_json(@toolbox.generate_json(hash))
 
         # Validate resource
-        self.class.valid_resource!(@json)
+        self.class.valid_resource!(@hash)
 
         # Implement getters
         implement_field_accessors
@@ -176,15 +176,15 @@ module ChatbotHelper
       end
 
       def to_s
-        @toolbox.generate_json(@json)
+        @toolbox.generate_json(@hash)
       end
 
       alias to_json to_s
 
       def ==(other)
         other.is_a?(ChatbotHelper::Telegram::BaseResource) ?
-          @json == other.json :
-          @json == other
+          @hash == other.hash :
+          @hash == other
       end
 
       alias eql? ==
@@ -194,20 +194,20 @@ module ChatbotHelper
       def implement_field_accessors
         self.class.required_fields.each do |f|
           define_singleton_method(f) do
-            return @json[f]
+            return @hash[f]
           end
         end
 
         self.class.optional_fields.each do |f|
           define_singleton_method(f) do
-            return @json[f]
+            return @hash[f]
           end
         end
       end
 
       def implement_object_accessors
         self.class.required_objects.each do |o|
-          res = o[:type].new(json: @json[o[:name]])
+          res = o[:type].new(hash: @hash[o[:name]])
           define_singleton_method(o[:name]) do
             return res
           end
@@ -216,8 +216,8 @@ module ChatbotHelper
         # Optional objects mus be either nil or a valid resource
         self.class.optional_objects.each do |o|
           res = nil
-          res_val = @json[o[:name]]
-          res = o[:type].new(json: res_val) unless res_val.nil?
+          res_val = @hash[o[:name]]
+          res = o[:type].new(hash: res_val) unless res_val.nil?
           define_singleton_method(o[:name]) do
             return res
           end
@@ -227,8 +227,8 @@ module ChatbotHelper
       def implement_array_accessors
         self.class.required_arrays.each do |a|
           elements = []
-          @json[a[:name]].each do |el|
-            elements << a[:type].new(json: el)
+          @hash[a[:name]].each do |el|
+            elements << a[:type].new(hash: el)
           end
           define_singleton_method(a[:name]) do
             return elements
@@ -238,10 +238,10 @@ module ChatbotHelper
         # Optional arrays must be either nil or arrays of valid resources
         self.class.optional_arrays.each do |a|
           elements = []
-          arr_val = @json[a[:name]]
+          arr_val = @hash[a[:name]]
           unless arr_val.nil?
             arr_val.each do |el|
-              elements << a[:type].new(json: el)
+              elements << a[:type].new(hash: el)
             end
           end
           define_singleton_method(a[:name]) do

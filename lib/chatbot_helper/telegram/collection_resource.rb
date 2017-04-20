@@ -31,12 +31,12 @@ module ChatbotHelper
 
       attr_reader :elements
 
-      def initialize(json: nil, string: nil)
-        super(json: json, string: string)
+      def initialize(hash: nil, string: nil)
+        super(hash: hash, string: string)
 
         @elements = []
-        @json.each do |r|
-          @elements << self.class.collection_type.new(json: r)
+        @hash.each do |r|
+          @elements << self.class.collection_type.new(hash: r)
         end
       end
 

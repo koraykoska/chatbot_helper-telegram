@@ -32,7 +32,7 @@ class ChatbotHelper::ResourcesTest < Minitest::Test
 
     # Test equality operator
     message = @toolbox.parse_json(@fixtures.valid_update)['message']
-    m = ChatbotHelper::Telegram::Message.new(json: message)
+    m = ChatbotHelper::Telegram::Message.new(hash: message)
 
     assert_equal m, u.message
 
@@ -40,7 +40,7 @@ class ChatbotHelper::ResourcesTest < Minitest::Test
     assert m.eql?(u.message)
 
     message[:message_id] = 5234
-    m_wrong = ChatbotHelper::Telegram::Message.new(json: message)
+    m_wrong = ChatbotHelper::Telegram::Message.new(hash: message)
 
     refute_equal m_wrong, u.message
 

@@ -45,10 +45,10 @@ module ChatbotHelper
       end
 
       def implement_field_accessors
-        if @json.respond_to?(:to_str)
+        if @hash.respond_to?(:to_str)
           define_singleton_method('text') do
-            # TODO: Should we return @json.to_str so it is always a `String`?
-            return @json
+            # TODO: Should we return @hash.to_str so it is always a `String`?
+            return @hash
           end
         else
           super
