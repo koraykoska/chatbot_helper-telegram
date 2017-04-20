@@ -69,4 +69,14 @@ class ChatbotHelper::ResourcesTest < Minitest::Test
     end
     assert elements.include?(valid_el)
   end
+
+  def test_valid_keyboard_button
+    # We can either provide an object or just a string which must be
+    # nevertheless a valid json string (i.e.: text = 'abc') is not enough, we
+    # must wrap it in double quotes text = '"abc"'
+    text = '"ButtonText"'
+    k = ChatbotHelper::Telegram::KeyboardButton.new(string: text)
+
+    assert_equal 'ButtonText', k.hash
+  end
 end
