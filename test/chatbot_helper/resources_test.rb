@@ -55,6 +55,9 @@ class ChatbotHelper::ResourcesTest < Minitest::Test
 
     json = @toolbox.parse_json(@fixtures.valid_user_profile_photos)
 
+    assert ChatbotHelper::Telegram::PhotoSizeCollection
+      .valid_resource?(json['photos'][0])
+
     # Test total_count
     assert_equal json['total_count'], u.total_count
 

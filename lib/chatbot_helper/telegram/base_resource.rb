@@ -6,9 +6,9 @@ module ChatbotHelper
         # Returns an array of words which represent the required fields
         # for this resource
         #
-        # Fields are primitive data types like `String`, `Integer`, `Boolean`
-        # and `Float` or arrays of primitive data types.
-        # If you have more complex types like `Object` or arrays of `Object`s,
+        # Fields are primitive data types like +String+, +Integer+, +Boolean+
+        # and +Float+ or arrays of primitive data types.
+        # If you have more complex types like +Object+ or arrays of +Object+s,
         # see {required_objects}, {optional_objects}, {required_arrays} and
         # {optional_arrays}.
         #
@@ -20,9 +20,9 @@ module ChatbotHelper
         # Returns an array of words which represent the optional fields
         # for this resource
         #
-        # Fields are primitive data types like `String`, `Integer`, `Boolean`
-        # and `Float` or arrays of primitive data types.
-        # If you have more complex types like `Object` or arrays of `Object`s,
+        # Fields are primitive data types like +String+, +Integer+, +Boolean+
+        # and +Float+ or arrays of primitive data types.
+        # If you have more complex types like +Object+ or arrays of +Object+s,
         # see {required_objects}, {optional_objects}, {required_arrays} and
         # {optional_arrays}.
         #
@@ -36,10 +36,10 @@ module ChatbotHelper
         #
         # The hashes must follow the following structure:
         #
-        # `{ name: 'field_name', type: 'ChatbotHelper::Telegram::FieldType' }`
+        # +{ name: 'field_name', type: 'ChatbotHelper::Telegram::FieldType' }+
         #
-        # where `type` represents the type of the resulting object which must
-        # be a subclass of `ChatbotHelper::Telegram::BaseResource`
+        # where +type+ represents the type of the resulting object which must
+        # be a subclass of +ChatbotHelper::Telegram::BaseResource+
         #
         # @return [Array<Hash>] The required objects for this resource
         def required_objects
@@ -51,10 +51,10 @@ module ChatbotHelper
         #
         # The hashes must follow the following structure:
         #
-        # `{ name: 'field_name', type: 'ChatbotHelper::Telegram::FieldType' }`
+        # +{ name: 'field_name', type: 'ChatbotHelper::Telegram::FieldType' }+
         #
-        # where `type` represents the type of the resulting object which must
-        # be a subclass of `ChatbotHelper::Telegram::BaseResource`
+        # where +type+ represents the type of the resulting object which must
+        # be a subclass of +ChatbotHelper::Telegram::BaseResource+
         #
         # @return [Array<Hash>] The optional objects for this resource
         def optional_objects
@@ -66,11 +66,11 @@ module ChatbotHelper
         #
         # The hashes must follow the following structure:
         #
-        # `{ name: 'field_name', type: 'ChatbotHelper::Telegram::FieldType' }`
+        # +{ name: 'field_name', type: 'ChatbotHelper::Telegram::FieldType' }+
         #
-        # where `type` represents the type of the resulting objects in the
+        # where +type+ represents the type of the resulting objects in the
         # array, which must be a subclass of
-        # `ChatbotHelper::Telegram::BaseResource`
+        # +ChatbotHelper::Telegram::BaseResource+
         #
         # Arrays are arrays of complex objects. If you have arrays of primitive
         # data types see {required_fields} and {optional_fields}.
@@ -85,11 +85,11 @@ module ChatbotHelper
         #
         # The hashes must follow the following structure:
         #
-        # `{ name: 'field_name', type: 'ChatbotHelper::Telegram::FieldType' }`
+        # +{ name: 'field_name', type: 'ChatbotHelper::Telegram::FieldType' }+
         #
-        # where `type` represents the type of the resulting objects in the
+        # where +type+ represents the type of the resulting objects in the
         # array, which must be a subclass of
-        # `ChatbotHelper::Telegram::BaseResource`
+        # +ChatbotHelper::Telegram::BaseResource+
         #
         # Arrays are arrays of complex objects. If you have arrays of primitive
         # data types see {required_fields} and {optional_fields}.
@@ -156,8 +156,8 @@ module ChatbotHelper
 
       # Initializes a new resource object with the given json String or hash.
       #
-      # Either `json` or `string` should be set but not both. It is recommended
-      # to pass `string` instead of an already deserialized hash (`json`) to the
+      # Either +json+ or +string+ should be set but not both. It is recommended
+      # to pass +string+ instead of an already deserialized hash (+json+) to the
       # initializer.
       #
       # @param json [Hash] A hash which represents this resource as described in the telegram bot api. Defaults to nil.
